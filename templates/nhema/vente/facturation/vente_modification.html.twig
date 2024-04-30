@@ -1,0 +1,448 @@
+{% extends 'base_nhema.html.twig' %}
+{% set queryParams = app.request.query.all %}
+{% set queryString = queryParams|filter((v, k) => k != "page" and k != "ajustement" and k != "id_stock") | url_encode %}
+
+{% block title %}Modification{% endblock %}
+{% block bandeau %} {% endblock %}
+{% block header %} {% endblock %}
+ {% block carousel %}
+ {% endblock %}
+ {% block categories %} {% endblock %}
+ {% block contact %} {% endblock %}
+ {% block collaborateurs %} {% endblock %}
+ {% block scroll %} {% endblock %}
+ {% block footer %} {% endblock %}
+ {% block social %} {% endblock %}
+
+{% block produits %}
+
+    <div class="row">
+        <div class="col-sm-12 col-md-2 pb-3" style="background-color:#152736;">
+            <a style="width: 100%; " class="btn btn-warning text-center fw-bold m-auto my-2" href="{{path("app_nhema_home_type_vente", {lieu_vente : lieu_vente.id})}}">Accueil</a>
+            {% for menu in menu_vente %}
+                <a style="width: 100%; " class="btn btn-light text-center fw-bold m-auto my-2" href="{{path("app_nhema_vente_modification_commande_new", {id: facture.id, lieu_vente : lieu_vente.id, id_menu : menu.id, nom_menu : menu.nom })}}">{{menu.nom|ucwords}}</a>        
+            {% endfor %}
+            {% for plat in types_plats %}
+                <a style="width: 100%; " class="btn btn-light text-center fw-bold m-auto my-2" href="{{path("app_nhema_vente_modification_commande_new", {id: facture.id, lieu_vente : lieu_vente.id, id_plat : plat.id, nom_menu : 'plat' })}}">{{plat.nom|ucwords}}</a>        
+            {% endfor %}
+        </div>
+        <div class="col-sm-12 col-md-4  border border-danger border-3 rounded">
+        
+            <div  class="w-100 fw-bold fs-5 p-1 mb-1 text-white text-center m-auto rounded" style="background-color: #2C1A6C">
+                <input type="text" name="search_product" class="form-control" id="search_product" placeholder="Recherchez votre produit">
+                <div class="bg-white text-danger text-start" id="result-search-product"></div>
+            </div>
+            {% if type_menu == 'type_cocktail' %}
+                <div class="row">
+                    {% for type_menu in types_menu %}
+                        <div class="col pb-2">
+                            <a style="text-decoration: none" href="{{ path('app_nhema_vente_modification_commande_new', {id: facture.id, lieu_vente : lieu_vente.id, type : type_menu.id, nom_menu : 'type_cocktail' }) }}">
+                                <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 150px;">
+                                    <div class="card-bod m-auto text-center fw-bold fs-7">{{type_menu.nom|ucwords}}</div>
+                                    {% if type_menu.image %}            
+                                        <img src="{{asset(chemin_images_cocktails) ~ type_menu.image}}" alt="image {{type_menu.nom}}" class="card-img-top m-auto"  style="width: 6rem; height: 6rem">                        
+                                    {% else %}
+                                        <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ type_menu.nom }}" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+                                    {% endif %}
+
+                                </div>
+                            </a>
+                        </div>                               
+                    {% endfor %}
+                </div>
+            {% elseif type_menu == 'alcools' %}
+                <div class="row">
+                    {% for type_menu in types_menu %}
+                        <div class="col pb-2">
+                            <a style="text-decoration: none" href="{{ path('app_nhema_vente_modification_commande_new', {id: facture.id, lieu_vente : lieu_vente.id, type : type_menu.id, nom_menu : 'type_vente_alcools' }) }}">
+                                <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 150px;">
+                                    <div class="card-bod m-auto text-center fw-bold fs-7">{{type_menu.nom|ucwords}}</div>
+                                    {% if type_menu.image %}            
+                                        <img src="{{asset(chemin_images_boissons) ~ type_menu.image}}" alt="image {{type_menu.nom}}" class="card-img-top m-auto"  style="width: 6rem; height: 6rem">                        
+                                    {% else %}
+                                        <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ type_menu.nom }}" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+                                    {% endif %}
+
+                                </div>
+                            </a>
+                        </div>                               
+                    {% endfor %}
+                </div>
+            {% elseif type_menu == 'type_vente_alcool' %}
+                <div class="row">
+                    <div class="col pb-2">
+                        <a style="text-decoration: none" href="{{ path('app_nhema_vente_modification_commande_new', {id: facture.id, lieu_vente : lieu_vente.id, categorie : type, nom_menu : 'choix_alcool', type_vente : 'verre' }) }}">
+                            <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 150px;">
+                                <div class="card-bod m-auto text-center fw-bold fs-7">VERRE</div>
+                                <img src="{{asset('images/config/verre.jpg')}}"  alt="image verre" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col pb-2">
+                        <a style="text-decoration: none" href="{{ path('app_nhema_vente_modification_commande_new', {id: facture.id, lieu_vente : lieu_vente.id, categorie : type, nom_menu : 'choix_alcool', type_vente : 'bouteille' }) }}">
+                            <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 150px;">
+                                <div class="card-bod m-auto text-center fw-bold fs-7">BOUTEILLE</div>
+                                <img src="{{asset('images/config/bouteille.jpg')}}"  alt="image verre" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+
+                            </div>
+                        </a>
+                    </div>  
+                </div>
+            {% elseif type_menu == 'cocktail' %}
+                <div class="row">
+                    {% for liste in liste_menu %}
+                        <div class="col pb-2">
+                            <a class="btn" href="{{path("app_nhema_vente_modification_commande_new", {id: facture.id, lieu_vente : lieu_vente.id, id_prod : liste.id, type : type, nom_menu : 'type_cocktail'}) }}">
+                                <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 180px;">
+                                    <div class="card-bod m-auto text-center fw-bold fs-7">{{liste.nom|ucwords}}
+                                    </div>
+                                    {% if liste.image %}            
+                                        <img src="{{asset(chemin_images_cocktails) ~ liste.image}}" alt="image {{liste.nom}}" class="card-img-top m-auto"  style="width: 6rem; height: 6rem">                        
+                                    {% else %}
+                                        <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ liste.nom }}" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+                                    {% endif %}
+                                    <div class="card-bod m-auto">
+                                        <h5 class="card-title text-center text-danger">{{liste.prixVente|number_format(0,',',' ')}}</h5>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% elseif type_menu == 'choix_alcool' %}
+                <div class="row">
+                    {% for liste in liste_menu %}
+                        <div class="col pb-2">
+                            <a class="btn" href="{{path("app_nhema_vente_modification_commande_new", {id: facture.id, lieu_vente : lieu_vente.id, id_prod : liste.id, categorie : type, nom_menu : 'choix_alcool'}) }}">
+                                <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 180px;">
+                                    <div class="card-bod m-auto text-center fw-bold fs-7">{{liste.nom|ucwords}}
+                                    </div>
+                                    {% if liste.image %}            
+                                        <img src="{{asset(chemin_images_boissons) ~ liste.image}}" alt="image {{liste.nom}}" class="card-img-top m-auto"  style="width: 6rem; height: 6rem">                        
+                                    {% else %}
+                                        <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ liste.nom }}" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+                                    {% endif %}
+                                    <div class="card-bod m-auto">
+                                        <h5 class="card-title text-center text-danger">{{liste.prixVente|number_format(0,',',' ')}}</h5>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% elseif type_menu == 'bieres' %}
+                <div class="row">
+                    {% for liste in liste_menu %}
+                        <div class="col pb-2">
+                            <a class="btn" href="{{path("app_nhema_vente_modification_commande_new", {id: facture.id, lieu_vente : lieu_vente.id, id_prod : liste.id, categorie : type, nom_menu : 'bières'}) }}">
+                                <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 180px;">
+                                    <div class="card-bod m-auto text-center fw-bold fs-7">{{liste.nom|ucwords}}
+                                    </div>
+                                    {% if liste.image %}            
+                                        <img src="{{asset(chemin_images_boissons) ~ liste.image}}" alt="image {{liste.nom}}" class="card-img-top m-auto"  style="width: 6rem; height: 6rem">                        
+                                    {% else %}
+                                        <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ liste.nom }}" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+                                    {% endif %}
+                                    <div class="card-bod m-auto">
+                                        <h5 class="card-title text-center text-danger">{{liste.prixVente|number_format(0,',',' ')}}</h5>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% elseif type_menu == 'boissons' %}
+                <div class="row">
+                    {% for liste in liste_menu %}
+                        <div class="col pb-2">
+                            <a class="btn" href="{{path("app_nhema_vente_modification_commande_new", {id: facture.id, lieu_vente : lieu_vente.id, id_prod : liste.id, categorie : type, nom_menu : 'boissons'}) }}">
+                                <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 180px;">
+                                    <div class="card-bod m-auto text-center fw-bold fs-7">{{liste.nom|ucwords}}
+                                    </div>
+                                    {% if liste.image %}            
+                                        <img src="{{asset(chemin_images_boissons) ~ liste.image}}" alt="image {{liste.nom}}" class="card-img-top m-auto"  style="width: 6rem; height: 6rem">                        
+                                    {% else %}
+                                        <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ liste.nom }}" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+                                    {% endif %}
+                                    <div class="card-bod m-auto">
+                                        <h5 class="card-title text-center text-danger">{{liste.prixVente|number_format(0,',',' ')}}</h5>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% elseif type_menu == 'boissons_chaudes' %}
+                <div class="row">
+                    {% for liste in liste_menu %}
+                        <div class="col pb-2">
+                            <a class="btn" href="{{path("app_nhema_vente_modification_commande_new", {id: facture.id, lieu_vente : lieu_vente.id, id_prod : liste.id, categorie : type, nom_menu : 'boissons chaudes'}) }}">
+                                <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 180px;">
+                                    <div class="card-bod m-auto text-center fw-bold fs-7">{{liste.nom|ucwords}}
+                                    </div>
+                                    {% if liste.image %}            
+                                        <img src="{{asset(chemin_images_boissons) ~ liste.image}}" alt="image {{liste.nom}}" class="card-img-top m-auto"  style="width: 6rem; height: 6rem">                        
+                                    {% else %}
+                                        <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ liste.nom }}" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+                                    {% endif %}
+                                    <div class="card-bod m-auto">
+                                        <h5 class="card-title text-center text-danger">{{liste.prixVente|number_format(0,',',' ')}}</h5>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% elseif type_menu == 'chichas' %}
+                <div class="row">
+                    {% for liste in liste_menu %}
+                        <div class="col pb-2">
+                            <a class="btn" href="{{path("app_nhema_vente_modification_commande_new", {id: facture.id, lieu_vente : lieu_vente.id, id_prod : liste.id, categorie : type, nom_menu : 'chichas'}) }}">
+                                <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 180px;">
+                                    <div class="card-bod m-auto text-center fw-bold fs-7">{{liste.nom|ucwords}}
+                                    </div>
+                                    {% if liste.image %}            
+                                        <img src="{{asset(chemin_images_chichas) ~ liste.image}}" alt="image {{liste.nom}}" class="card-img-top m-auto"  style="width: 6rem; height: 6rem">                        
+                                    {% else %}
+                                        <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ liste.nom }}" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+                                    {% endif %}
+                                    <div class="card-bod m-auto">
+                                        <h5 class="card-title text-center text-danger">{{liste.prixVente|number_format(0,',',' ')}}</h5>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% elseif type_menu == 'plats' %}
+                <div class="row">
+                    {% for liste in liste_menu %}
+                        <div class="col pb-2">
+                            <a class="btn" href="{{path("app_nhema_vente_modification_commande_new", {id: facture.id, lieu_vente : lieu_vente.id, id_prod : liste.id, id_plat : type, categorie : type, nom_menu : 'plat'}) }}">
+                                <div class="card m-auto border-10 border-primary" style="width: 9rem; height: 180px;">
+                                    <div class="card-bod m-auto text-center fw-bold fs-7">{{liste.nom|ucwords}}
+                                    </div>
+                                    {% if liste.image %}            
+                                        <img src="{{asset(chemin_images_plats) ~ liste.image}}" alt="image {{liste.nom}}" class="card-img-top m-auto"  style="width: 6rem; height: 6rem">                        
+                                    {% else %}
+                                        <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ liste.nom }}" class="card-img-top m-auto" style="width: 6rem; height: 6rem">
+                                    {% endif %}
+                                    <div class="card-bod m-auto">
+                                        <h5 class="card-title text-center text-danger">{{liste.prixVente|number_format(0,',',' ')}}</h5>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+        <div class="col-sm-12 col-md-6  border border-danger border-3 rounded m-0 p-0">
+            <table class="table table-bordered table-striped table-hover align-middle">
+                <thead class="sticky-top bg-light text-center">
+                    <tr>
+                        <th class="bg-warning text-white" colspan="6">
+                            <div class="row align-items-center ">
+                                <div class="col-sm-12 col-md-8 fw-bold">
+                                    {% if emplacement.nom is defined %}
+                                        Commande: {{emplacement.nom|ucwords}}
+                                    {% else %}
+                                        Commande : {{emplacement|ucwords}}
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-sm-12 col-md-4">
+                                    <input type="text" name="search" class="form-control" id="search_client_vente" placeholder="{{ session_client ? session_client.prenom|ucwords ~ " " ~ session_client.nom|strtoupper : "Récherchez un client" }}">
+                                </div>
+                                <div class="bg-light text-white " id="result-search_vente"></div>
+
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="bg-info text-white">Qtité</th>
+                        <th class="bg-info text-white">Désignation</th>
+                        <th class="bg-info text-white">Total</th>
+                        <th class="bg-info text-white">Commentaire</th>
+                        <th class="bg-info text-white">Offert</th>
+                        <th class="bg-info text-white"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set totalCmd = 0 %}
+                    {% for commande in commandes %}
+                        {% set totalCmdProd = commande.quantite * commande.prixVente %}
+                        {% set totalCmd = totalCmd + totalCmdProd %}
+                        {% if commande.prixVente == 0 %}
+                            {% set checked = 'checked' %}
+                        {% else %}
+                            {% set checked = '' %}
+                        {% endif %}
+                        <tr>
+                            <form action="">
+                                <td class="text-center" style="width:15%;">
+                                    <input onChange="this.form.submit()" class="form-control text-center fw-bold" onChange="this.form.submit()" type="number" name="qtite" value="{{commande.quantite}}">
+                                    <input type="hidden" name="id_prod_modif" value="{{commande.id}}">
+                                </td>
+                                <td>{{commande.product.nom|ucwords}}</td>
+                                <td class="text-end">{{totalCmdProd|number_format(0,',',' ')}}</td>
+                                <td><input onChange="this.form.submit()" class="form-control" type="text" name="commentaire" value="{{commande.commentaire|ucfirst}}"></td>
+                                <td class="text-center">
+                                    {# <input onChange="this.form.submit()" class="form-check-input" type="checkbox" name="offert" {{checked}} id="defaultCheck{{commande.id}}"> #}
+
+                                    <input onChange="this.form.submit()" name="offert" class="form-check-input" type="checkbox" {{ checked }} id="defaultCheck{{ commande.id }}">
+                                    <label class="form-check-label" for="defaultCheck{{ commande.id }}">
+                                        offert
+                                    </label>
+                            
+                                </td>
+                            </form>                        
+
+                            <td>
+                                <form method="post" action="{{ path('app_nhema_vente_modification_commande_delete', {'id': commande.id, lieu_vente : lieu_vente.id, facture : facture.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commande.id) }}">
+                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    <tr>
+                        <th colspan="6">
+                            <div class="text-center bg-success text-white fs-5 fw-bold p-2" colspan="5">
+                                <div for="">Total Cmd : {{totalCmd|number_format(0,',',' ')}}</div> 
+                            </div>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th colspan="6" class="bg-info text-white">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="row">
+                                        <form class="align-items-center">
+                                            <label class="form-label mx-1" for="">Remise</label>
+                                            <select class="form-select" onChange ="this.form.submit()" name="remise_glob" id="">
+                                                <option value="{{session_remise_glob ? session_remise_glob|number_format(0,',',' ') : ""}}">{{session_remise_glob ? session_remise_glob : ""}}%</option>
+                                                {% for remise in 1..100 %}
+                                                    <option value="{{remise}}">{{remise}}%</option>
+                                                {% endfor %}
+                                            </select>
+
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="row">
+                                        <form class="align-items-center">
+                                            <label class="form-label mx-1" for="">Montant Payé</label>
+                                            <input onChange ="this.form.submit()" type="text" name="montant_paye" value="{{session_montant_paye ? session_montant_paye|number_format(0,',',' ') : ""}}" class="form-control text-center fw-bold ">
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="row">
+                                        <form class="align-items-center">
+                                            <label class="form-label mx-1" for="">Frais Sup</label>
+                                            <input onChange ="this.form.submit()" type="text" name="frais_sup" value="{{session_frais_sup ? session_frais_sup|number_format(0,',',' ') : ""}}" class="form-control text-center fw-bold ">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="6" class="bg-info text-white">
+                            <form method="POST" action="{{path("app_nhema_vente_modification_commande_validation", {facture : facture.id, lieu_vente : lieu_vente.id})}}">
+                                {% set session_montant_paye = session_montant_paye ? session_montant_paye : 0 %}
+
+                                {% set session_frais_sup = session_frais_sup ? session_frais_sup : 0 %}
+
+                                {% set session_remise_glob = session_remise_glob ? session_remise_glob : 0 %}
+
+                                {% set total_cmd_gen = (totalCmd * (1 - (session_remise_glob / 100))) + session_frais_sup %}
+
+                                {% set paye = (session_montant_paye ) %}
+
+                                {% set reste = (total_cmd_gen - paye )  %}
+                                <div class="row">
+                                    <input type="hidden" name="totalFacture" value="{{total_cmd_gen}}">
+                                    <input type="hidden" name="montantPaye" value="{{paye}}">
+                                    <input type="hidden" name="reste" value="{{reste > 0 ? reste : 0}}">
+                                    <input type="hidden" name="rendu" value="{{reste}}">
+                                    <input type="hidden" name="montantRemise" value="{{(session_remise_glob)}}">
+                                    <input type="hidden" name="frais" value="{{(session_frais_sup)}}">
+                                    <input type="hidden" name="type_vente" value="{{(type_vente)}}">
+                                    {% if emplacement.nom is defined %}
+                                        <input type="hidden" name="emplacement" value="{{(emplacement.id)}}">
+
+                                    {% else %}
+                                        <input type="hidden" name="emplacement" value="{{(emplacement)}}">
+                                    {% endif %}
+
+                                    <div class="col-sm-12 col-md-4">
+                                        <div class="row">
+                                            <label class="form-label mx-1" for="">Mode de paie</label>
+                                            <select name="mode_paie" required class="form-select">
+                                                <option value="{{facture.modePaie.id}}">{{facture.modePaie.designation}}</option>
+                                                {% for mode in modes_paie %}
+                                                    <option value="{{mode.id}}">{{mode.designation}}</option>                 
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <div class="row">
+                                            <label class="form-label mx-1" for="">Caisses</label>
+                                            <select name="caisse" required class="form-select">
+                                                <option value="{{facture.caisse.id}}">{{facture.caisse.designation}}</option>
+                                                {% for caisse in caisses %}
+                                                    <option value="{{caisse.id}}">{{caisse.designation}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {% if reste <= 0   %}
+                                        <div class="col-sm-12 col-md-2">
+                                            <button type="submit" class="btn btn-warning w-100 mt-4 py-3">Modifier</button>
+                                        </div>
+                                    {% elseif reste > 0 and  session_client is not empty %}
+                                        <div class="col-sm-12 col-md-2">
+                                            <button type="submit" class="btn btn-warning w-100 mt-4 py-3">Modifier</button>
+                                        </div>
+                                        
+                                    {% endif %}
+                                    {# <div class="col-sm-12 col-md-4">
+                                        <button type="submit" class="btn btn-success w-100 mt-4 py-3">Valider</button>
+                                    </div> #}
+                                </div>
+                            </form>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="6">
+                            <div class="col-sm-12 col-md-4 ">
+                                {% if reste > 0 %}
+                                    <label class="btn btn-danger w-100 py-2 ">Reste à payer {{(reste)|number_format(0,',',' ')}}</label>
+                                {% else %}                                            
+                                    <label class="btn btn-success w-100 py-2 ">Rendu {{(reste)|number_format(0,',',' ')}}</label>
+                                {% endif %}
+                                
+                            </div>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

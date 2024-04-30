@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CocktailRecette{% endblock %}
+
+{% block body %}
+    <h1>CocktailRecette</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cocktail_recette.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ cocktail_recette.quantite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nhema_admin_cocktail_recette_index') }}">back to list</a>
+
+    <a href="{{ path('app_nhema_admin_cocktail_recette_edit', {'id': cocktail_recette.id}) }}">edit</a>
+
+    {{ include('nhema/admin/cocktail_recette/_delete_form.html.twig') }}
+{% endblock %}

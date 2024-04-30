@@ -1,0 +1,8 @@
+<div class="col-sm-12 col-md-2 pb-3" style="background-color:#152736;">
+    <a style="width: 100%; " class="btn btn-light text-center fw-bold m-auto my-2" href="{{path("app_nhema_home_type_vente", {lieu_vente : lieu_vente.id})}}">Accueil</a>
+
+    {% for salle in salles %}
+        <a style="width: 100%; " class="btn btn-light text-center fw-bold m-auto my-2" href="{{path("app_nhema_vente_table_index", {lieu_vente : lieu_vente.id, salle : salle.id})}}">{{salle.nom|ucwords}}</a>        
+    {% endfor %}     
+    <a style="width: 100%; " class="btn btn-light text-center fw-bold m-auto my-2" href="{{path("app_nhema_vente_table_liste", {lieu_vente : lieu_vente.id})}}">Gestion des tables</a>
+</div>

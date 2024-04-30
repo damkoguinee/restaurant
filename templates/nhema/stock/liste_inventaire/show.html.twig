@@ -1,0 +1,56 @@
+{% extends 'base_nhema.html.twig' %}
+
+{% block title %}liste des inventaires{% endblock %}
+ {% block categories %} {% endblock %}
+ {% block contact %} {% endblock %}
+ {% block collaborateurs %} {% endblock %}
+ {% block scroll %} {% endblock %}
+ {% block footer %} {% endblock %}
+ {% block social %} {% endblock %}
+{% block bandeau %} {% endblock %}
+ {% block carousel %}
+    <div id="carouselExampleAutoplaying" class="carousel slide py-2" data-bs-ride="carousel">
+    </div>
+ {% endblock %}
+
+{% block produits %}
+    <div class="row">
+        {% include "_common/_nav_stock.html.twig" %}
+        <div class="col-sm-12 col-md-10">
+
+            <table class="table table-bordered table-striped table-hover align-middle">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ liste_inventaire.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date de Création</th>
+                        <td>{{ liste_inventaire.dateCreation ? liste_inventaire.dateCreation|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ liste_inventaire.description }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Crée par </th>
+                        <td>{{ liste_inventaire.personnel.prenom | ucwords }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pb-4 d-flex justify-content-between">
+                <a class="btn btn-light" href="{{path("app_nhema_stock_liste_inventaire_new", {lieu_vente : liste_inventaire.lieuVente.id})}}">Retour</a>
+
+                {% if is_granted("ROLE_MODIFICATION") %}
+                    <a oncLick="alerteConfirmation()" class="btn btn-warning mx-2" href="{{ path('app_nhema_stock_liste_inventaire_cloture', {'id': liste_inventaire.id}) }}">Clôturer</a>
+                {% endif %}
+
+                {% if is_granted("ROLE_SUPPRESSION") %}
+                    {{ include('nhema/stock/liste_inventaire/_delete_form.html.twig') }}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

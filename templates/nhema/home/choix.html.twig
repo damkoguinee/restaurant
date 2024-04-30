@@ -1,0 +1,152 @@
+{% extends 'base_nhema_home.html.twig' %}
+
+{% block title %}menu{% endblock %}
+ {% block scroll %} {% endblock %}
+ {% block carousel %}
+    <div id="carouselExampleAutoplaying" class="carousel slide py-2" data-bs-ride="carousel" >
+    </div>
+ {% endblock %}
+
+{% block produits %}
+
+    <div class="container-fluid align-items-center" style="min-height: 90vh; background-color:#193c51;">
+        <div class="row alert alert-danger">
+            {{ include("_common/_messages_flash.html.twig") }}
+
+            <div class="col-6 text-center fw-bold fs-5">
+                <a href="{{path("app_nhema_journee_travail_new", {lieu_vente : lieu_vente.id})}}" >
+                    Journée en-cours : {{jour ? jour.jourDeTravail|date("d/m/Y") :""}}
+                    <i class="fa fa-edit me-2 text-danger"></i>
+                </a>
+            </div>
+            
+            <div class="col-6 text-success text-center fw-bold">Personnel Connecté : {{app.user.username}}</div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center">
+
+            <div class="row m-4 p-4 justify-content-center align-item-center" style="margin: auto; width:90%; background-image: url({{ asset('images/config/fond.jpg') }});">
+
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_home_type_vente", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/achat.jpg') }}" class="card-img-top m-auto" alt="vente" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Ventes</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_vente_facturation_index", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/compta.jpg') }}" class="card-img-top m-auto" alt="vente" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Gestion des ventes</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+               
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_stock_gestion_stock_index", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/stock.jpg') }}" class="card-img-top m-auto" alt="stock" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Gestion de stock</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div> 
+
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_personnel_absence_personnel_index", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/personnel.jpg') }}" class="card-img-top m-auto" alt="personnel" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Gestion/personnel</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_sorties_decaissement_index", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/retrait.jpg') }}" class="card-img-top m-auto" alt="retrait" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Sorties</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_entrees_versement_index", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/versement.jpg') }}" class="card-img-top m-auto" alt="versement" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Entrées</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_caisse_index", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/caisse.jpg') }}" class="card-img-top m-auto" alt="caisse" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Gestion des Caisses</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_compte_compte_collaborateur", {lieu_vente : lieu_vente.id, type1 : 'client', type2 : 'client-fournisseur'})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/compte.jpg') }}" class="card-img-top m-auto" alt="compte" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Gestion des Comptes</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_client_client_index", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/clients.jpg') }}" class="card-img-top m-auto" alt="clients" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Gestion/clients</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_journee_travail_index", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/calendrier.jpg') }}" class="card-img-top m-auto" alt="calendrier" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Journées</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-secondary" href="{{path("app_nhema_achat_achat_fournisseur_index", {lieu_vente : lieu_vente.id})}}">
+                        <div class="card" style="width: 9rem;">
+                            <img src="{{ asset('images/config/achatfournisseur.jpg') }}" class="card-img-top m-auto" alt="achat" style="width: 5rem; height: 5rem">
+                            <div class="card-bod m-auto ">
+                                <h6 class="card-title text-center">Achats Interne</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

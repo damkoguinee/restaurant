@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ModificationCommande{% endblock %}
+
+{% block body %}
+    <h1>Create new ModificationCommande</h1>
+
+    {{ include('nhema/vente/modification_commande/_form.html.twig') }}
+
+    <a href="{{ path('app_nhema_vente_modification_commande_index') }}">back to list</a>
+{% endblock %}

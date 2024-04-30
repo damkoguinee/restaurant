@@ -1,0 +1,112 @@
+{% extends 'base_nhema_home.html.twig' %}
+{% set queryParams = app.request.query.all %}
+{% set queryString = queryParams|filter((v, k) => k != "page" and k != "ajustement" and k != "id_stock") | url_encode %}
+
+{% block title %}liste des entrees{% endblock %}
+{% block bandeau %} {% endblock %}
+ {% block carousel %}
+    <div id="carouselExampleAutoplaying" class="carousel slide py-2" data-bs-ride="carousel">
+    </div>
+ {% endblock %}
+ {% block categories %} {% endblock %}
+ {% block contact %} {% endblock %}
+ {% block collaborateurs %} {% endblock %}
+ {% block scroll %} {% endblock %}
+ {% block footer %} {% endblock %}
+ {% block social %} {% endblock %}
+
+{% block produits %}
+
+    <div class="row my-2">
+        {% include "_common/_nav_nhema_admin.html.twig" %}
+
+        <div class="col-sm-12 col-md-10">
+            {{ include("_common/_messages_flash.html.twig") }}
+        
+            <table class="table table-bordered table-striped table-hover align-middle">
+
+                <thead class="sticky-top bg-light text-center">
+                    <tr>
+                        <th colspan="7" class="text-center bg-info text-white">
+                            Liste des entrees
+                            <a class="btn btn-warning" href="{{ path('app_nhema_admin_entree_new') }}">Ajouter un entree</a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="7" class="text-center bg-info text-white">
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </th>
+                    <tr>
+                    <tr>
+                        <th class="bg-info text-white">N°</th>
+                        <th class="bg-info text-white">Nom</th>
+                        <th class="bg-info text-white">Description</th>
+                        <th class="bg-info text-white">Prix Vente</th>
+                        <th class="bg-info text-white">Type</th>
+                        <th class="bg-info text-white">Etat</th>
+                        <th class="bg-info text-white">actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, entree in entrees.data %}
+                        <tr>
+                            <td class="text-center">
+                                {{ key +1 }}
+                                {% if entree.image %}            
+                                    <img src="{{asset(chemin_images_entrees) ~ entree.image}}" alt="image {{entree.nom}}" class="miniature">                        
+                                {% else %}
+                                    <img src="{{asset('images/config/default.jpg')}}"  alt="image {{ entree.nom }}" class="miniature">
+                                {% endif %}
+                            </td>
+                            <td>{{ entree.nom|ucfirst }}</td>
+                            <td>{{ entree.description|ucfirst }}</td>
+                            <td class="text-end">{{ entree.prixVente|number_format(0,',',' ') }}</td>
+                            <td class="text-center">{{ entree.typeentree.nom|ucfirst }}</td>
+                            <td class="text-center">{{ entree.etat|ucfirst }}</td>
+                            <td class="text-center">
+                                <a class="btn btn-success" href="{{ path('app_nhema_admin_entree_show', {'id': entree.id}) }}"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-warning" href="{{ path('app_nhema_admin_entree_edit', {'id': entree.id}) }}"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">Aucun enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% set path = 'app_nhema_admin_entree_index'  %}
+            {% set nbrePages = entrees.nbrePages %}
+            {% set pageEncours = entrees.pageEncours %}                   
+            {% if nbrePages > 1 %}                    
+
+                {% if nbrePages %}
+                    <nav aria-label="Page navigation example ">
+                        <ul class="pagination justify-content-start">
+                            {% if pageEncours > 1 %}
+                                <li class="page-item ">
+                                    <a class="page-link" href="{{path(path, { pageEncours : (pageEncours - 1), search : search})}}">&lt;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled" ><a class="page-link">&lt;</a></li>
+                            {% endif %}
+                            {% for page in 1..nbrePages %}                
+                                <li class="page-item {{ ( page == pageEncours) ? 'active' : ''}} "><a class="page-link" href="{{path(path, { pageEncours : page, search : search})}}">{{page}}</a></li>
+                            {% endfor %}
+                            {% if pageEncours < nbrePages %}
+                                <li class="page-item "><a class="page-link" href="{{path(path, {pageEncours : pageEncours + 1, search : search} ) }}">&gt;</a></li>
+                            {% else %}
+                                <li class="page-item disabled "><a href="" class="page-link" >&gt;</a></li>
+                            {% endif %}
+                            </li>
+                        </ul>
+                    </nav>
+                {% endif %}
+
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Facturation{% endblock %}
+
+{% block body %}
+    <h1>Create new Facturation</h1>
+
+    {{ include('nhema/vente/facturation/_form.html.twig') }}
+
+    <a href="{{ path('app_nhema_vente_facturation_index') }}">back to list</a>
+{% endblock %}

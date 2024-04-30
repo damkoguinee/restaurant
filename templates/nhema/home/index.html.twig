@@ -1,0 +1,76 @@
+{% extends 'base_nhema_home.html.twig' %}
+
+{% block title %}lieux-ventes{% endblock %}
+{% block bandeau %} {% endblock %}
+ {% block categories %} {% endblock %}
+ {% block contact %} {% endblock %}
+ {% block collaborateurs %} {% endblock %}
+ {% block scroll %} {% endblock %}
+ {% block footer %} {% endblock %}
+ {% block social %} {% endblock %}
+
+ {% block carousel %}
+    <div id="carouselExampleAutoplaying" class="carousel slide py-2" data-bs-ride="carousel">
+    </div>
+ {% endblock %}
+
+{% block produits %}
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 90vh; background-color:#193c51;">
+        <div class="row m-4 p-4 justify-content-center align-item-center" style="margin: auto; width:96%; background-image: url({{ asset('images/config/fond.jpg') }});">
+
+            <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                <a  class="btn btn-light" href="{{path("app_admin_entreprise_index")}}">
+                    <div class="card" style="width: 12rem; height:16rem;">
+                        <img src="{{ asset('images/config/admin.jpg') }}" class="card-img-top m-auto" alt="ventes"style="width: 7rem; height: 7rem">
+                        <div class="card-bod m-auto ">
+                            <h5 class="card-title text-center">Admin Site Web</h5>
+                            <h5 class="card-title text-center">{{entreprise.adresse|ucfirst}}</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                <a  class="btn btn-light" href="{{path("app_nhema_admin_plat_index")}}">
+                    <div class="card" style="width: 12rem; height:16rem;">
+                        <img src="{{ asset('images/config/admin.jpg') }}" class="card-img-top m-auto" alt="ventes"style="width: 7rem; height: 7rem">
+                        <div class="card-bod m-auto ">
+                            <h5 class="card-title text-center">Administration</h5>
+                            <h5 class="card-title text-center">{{entreprise.adresse|ucfirst}}</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                <a  class="btn btn-light" href="">
+                    <div class="card" style="width: 12rem; height:16rem; ">
+                        <img src="{{ asset('images/config/client.jpg') }}" class="card-img-top m-auto" alt="ventes"style="width: 7rem; height: 7rem">
+                        <div class="card-bod m-auto ">
+                            <h5 class="card-title text-center">Direction</h5>
+                            <h5 class="card-title text-center">{{entreprise.adresse|ucfirst}}</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            {% for lieu_vente in lieux_ventes %}      
+                <div class="col-sm-6 col-md-3 col-lg-3 m-auto my-4">
+                    <a  class="btn btn-light" href="{{path("app_nhema_home_lieuvente", {id : lieu_vente.id} )}}">
+                        <div class="card" style="width: 12rem; height:16rem;">
+                            <img src="{{ asset('images/config/achat.jpg') }}" class="card-img-top m-auto" alt="ventes"style="width: 7rem; height: 7rem">
+                            <div class="card-bod m-auto ">
+                                <h5 class="card-title text-center">Lieu de vente</h5>
+                                <h5 class="card-title text-center">{{lieu_vente.lieu|ucfirst}}</h5>
+                                <h5 class="card-title text-center">Resp: {{lieu_vente.gestionnaire.prenom}}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+
+            
+        </div>
+    </div>
+{% endblock %}
+

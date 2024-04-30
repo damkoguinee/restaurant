@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit primePersonnel{% endblock %}
+
+{% block body %}
+    <h1>Edit primePersonnel</h1>
+
+    {{ include('comptable/prime_personnel/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_nhema_personnel_prime_personnel_index' , {lieu_vente : lieu_vente.id}) }}">back to list</a>
+
+    {{ include('comptable/prime_personnel/_delete_form.html.twig') }}
+{% endblock %}

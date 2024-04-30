@@ -1,0 +1,49 @@
+{{ form_errors(form) }}
+{{ form_start(form) }}
+    <div class="row mb-1"> 
+        <div class="col-sm-12 col-md-3">
+            <label class="form-label mx-1" for="">Catégorie de boisson* <a href="{{path('app_nhema_admin_categorie_boisson_new') }}" class="btn btn-sm btn-warning"><i class="fas fa-plus"></i></a></label>
+            <div class="mx-1">{{ form_widget(form.categorie) }}</div>
+        </div>
+        
+        {% if boisson.id is empty %}
+            <div class="col-sm-12 col-md-2">
+                <label class="form-label" for="">Type de vente *</label>
+                <select class="form-select" name="typeBoisson[]" multiple id="" style="height:50px;">
+                    <option value="bouteille" selected>Bouteille</option>
+                    <option value="verre">Verre</option>
+                </select>
+            </div>
+        {% else %}
+            <div class="col-sm-12 col-md-2">
+                {{ form_row(form.typeBoisson) }}
+            </div>
+        {% endif %}
+        <div class="col-sm-12 col-md-4">
+            {{ form_row(form.nom) }}
+        </div>
+        <div class="col-sm-12 col-md-3">
+            {{ form_row(form.description) }}
+        </div>  
+    </div>
+    <div class="row mb-1"> 
+        <div class="col-sm-12 col-md-4">
+            {{ form_row(form.prixVente) }}
+        </div>
+        <div class="col-sm-12 col-md-2">
+            {{ form_row(form.volume) }}
+        </div>
+        <div class="col-sm-12 col-md-2">
+            {{ form_row(form.unite) }}
+        </div> 
+        <div class="col-sm-12 col-md-4">
+            {{ form_row(form.service) }}
+        </div>    
+    </div>
+    <div class="row mb-1"> 
+        <div class="col-sm-12 col-md-4">
+            {{ form_row(form.image) }}
+        </div>    
+    </div>
+    <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

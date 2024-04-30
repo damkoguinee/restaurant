@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LiaisonProduct{% endblock %}
+
+{% block body %}
+    <h1>Create new LiaisonProduct</h1>
+
+    {{ include('nhema/admin/liaison_product/_form.html.twig') }}
+
+    <a href="{{ path('app_nhema_admin_liaison_product_index') }}">back to list</a>
+{% endblock %}

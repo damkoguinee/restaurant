@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TableCommande{% endblock %}
+
+{% block body %}
+    <h1>TableCommande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ table_commande.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ table_commande.quantite }}</td>
+            </tr>
+            <tr>
+                <th>PrixVente</th>
+                <td>{{ table_commande.prixVente }}</td>
+            </tr>
+            <tr>
+                <th>DateCommande</th>
+                <td>{{ table_commande.dateCommande ? table_commande.dateCommande|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateSaisie</th>
+                <td>{{ table_commande.dateSaisie ? table_commande.dateSaisie|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nhema_vente_table_commande_index') }}">back to list</a>
+
+    <a href="{{ path('app_nhema_vente_table_commande_edit', {'id': table_commande.id}) }}">edit</a>
+
+    {{ include('nhema/vente/table_commande/_delete_form.html.twig') }}
+{% endblock %}

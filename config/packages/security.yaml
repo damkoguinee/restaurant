@@ -4,14 +4,29 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            custom_authenticator: App\Security\UserAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: app_login
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+                always_remember_me: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -22,8 +37,19 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/nhema/achat, roles: [ROLE_GESTIONNAIRE, ROLE_LIVREUR] }   
+        - { path: ^/nhema/personnel, roles: [ROLE_RESPONSABLE, ROLE_GESTIONNAIRE, ROLE_COMPTABLE] } 
+        - { path: ^/nhema/sorties, roles: [ROLE_RESPONSABLE, ROLE_GESTIONNAIRE, ROLE_COMPTABLE] } 
+        - { path: ^/nhema/stock, roles: ROLE_STOCK }   
+        - { path: ^/caisses, roles: ROLE_CAISSIER }
+        - { path: ^/patient, roles: IS_AUTHENTICATED_REMEMBERED }
+
+    role_hierarchy:
+        ROLE_GESTIONNAIRE: ROLE_STOCK, ROLE_LIVREUR, ROLE_SUPPRESSION, ROLE_MODIFICATION
+        ROLE_RESPONSABLE: ROLE_GESTIONNAIRE
+        ROLE_ADMIN: ROLE_RESPONSABLE, ROLE_STOCK
+        ROLE_DEV: ROLE_ADMIN
 
 when@test:
     security:

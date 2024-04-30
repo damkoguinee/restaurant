@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlatRecette{% endblock %}
+
+{% block body %}
+    <h1>PlatRecette</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ plat_recette.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ plat_recette.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nhema_admin_plat_recette_index') }}">back to list</a>
+
+    <a href="{{ path('app_nhema_admin_plat_recette_edit', {'id': plat_recette.id}) }}">edit</a>
+
+    {{ include('nhema/admin/plat_recette/_delete_form.html.twig') }}
+{% endblock %}

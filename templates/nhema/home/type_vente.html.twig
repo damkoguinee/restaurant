@@ -1,0 +1,82 @@
+{% extends 'base_nhema.html.twig' %}
+
+{% block title %}lieux-ventes{% endblock %}
+{% block bandeau %} {% endblock %}
+ {% block categories %} {% endblock %}
+ {% block contact %} {% endblock %}
+ {% block collaborateurs %} {% endblock %}
+ {% block scroll %} {% endblock %}
+ {% block footer %} {% endblock %}
+ {% block social %} {% endblock %}
+
+ {% block carousel %}
+    <div id="carouselExampleAutoplaying" class="carousel slide py-2" data-bs-ride="carousel">
+    </div>
+ {% endblock %}
+
+{% block produits %}
+
+<div class="container-fluid">
+
+    <div class="row mt-2">
+        <div class="card m-auto" style="width: 8rem;">
+        <img src="{{ asset('images/config/default-logo.jpg') }}" class="card-img-top m-auto" alt="default-loggo"style="width: 7rem; height: 7rem">
+
+        </div>
+    </div>
+
+    <div class="row m-auto">
+        <div class="text-center mt-2 fs-1 fw-bold text-success">BONJOUR</div>
+        <div class="text-center mt-2 fs-3 fw-bold text-danger">OÙ VOULEZ-VOUS MANGER?</div>
+    </div>
+
+    <div class="row bg-danger p-3 my-3 m-auto">
+
+        <div class="col">
+            <a style="text-decoration: none" href="{{path("app_nhema_vente_table_index", {lieu_vente : lieu_vente.id, 'type_vente' : 'surplace'} )}}">
+                <div class="card m-auto" style="width: 8rem;">
+                    <img src="{{ asset('images/config/surplace.jpg') }}" class="card-img-top m-auto" alt="surplace" style="width: 5rem; height: 5rem">
+                    <div class="card-bod m-auto">
+                    <h5 class="card-title">SURPLACE</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a style="text-decoration: none" href="{{path("app_nhema_vente_table_index", {lieu_vente : lieu_vente.id, 'type_vente' : 'emporter'} )}}">
+                <div class="card m-auto" style="width: 8rem;">
+                    <img src="{{ asset('images/config/emporter.jpg') }}" class="card-img-top m-auto" alt="emporter" style="width: 5rem; height: 5rem">
+                    <div class="card-bod m-auto">
+                        <h5 class="card-title">À EMPORTER</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a style="text-decoration: none" href="{{path("app_nhema_vente_table_index", {lieu_vente : lieu_vente.id, 'type_vente' : 'livraison'} )}}">
+                <div class="card m-auto" style="width: 8rem;">
+                    <img src="{{ asset('images/config/livraison.jpg') }}" class="card-img-top m-auto" alt="emporter" style="width: 5rem; height: 5rem">
+                    <div class="card-bod m-auto">
+                        <h5 class="card-title">À LIVRER</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a style="text-decoration: none" href="{{path("app_nhema_vente_table_commande_index", {'lieu_vente' : lieu_vente.id} )}}">
+                <div class="card m-auto" style="width: 8rem;">
+                    <img src="{{ asset('images/config/commandes.jpg') }}" class="card-img-top m-auto" alt="..." style="width: 5rem; height: 5rem">
+                    <div class="card-bod m-auto">
+                        <h5 class="card-title">COMMANDES</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+</div>
+
+</div>
+{% endblock %}
+

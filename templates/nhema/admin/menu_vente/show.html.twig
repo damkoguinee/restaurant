@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MenuVente{% endblock %}
+
+{% block body %}
+    <h1>MenuVente</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ menu_vente.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ menu_vente.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nhema_admin_menu_vente_index') }}">back to list</a>
+
+    <a href="{{ path('app_nhema_admin_menu_vente_edit', {'id': menu_vente.id}) }}">edit</a>
+
+    {{ include('nhema/admin/menu_vente/_delete_form.html.twig') }}
+{% endblock %}

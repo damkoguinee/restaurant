@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ModificationCommande{% endblock %}
+
+{% block body %}
+    <h1>ModificationCommande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ modification_commande.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ modification_commande.quantite }}</td>
+            </tr>
+            <tr>
+                <th>PrixVente</th>
+                <td>{{ modification_commande.prixVente }}</td>
+            </tr>
+            <tr>
+                <th>DateCommande</th>
+                <td>{{ modification_commande.dateCommande ? modification_commande.dateCommande|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateSaisie</th>
+                <td>{{ modification_commande.dateSaisie ? modification_commande.dateSaisie|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TypeVente</th>
+                <td>{{ modification_commande.typeVente }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ modification_commande.commentaire }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ modification_commande.statut }}</td>
+            </tr>
+            <tr>
+                <th>TypeProduct</th>
+                <td>{{ modification_commande.typeProduct }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nhema_vente_modification_commande_index') }}">back to list</a>
+
+    <a href="{{ path('app_nhema_vente_modification_commande_edit', {'id': modification_commande.id}) }}">edit</a>
+
+    {{ include('nhema/vente/modification_commande/_delete_form.html.twig') }}
+{% endblock %}

@@ -4,6 +4,23 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    dossier_images: "%kernel.project_dir%/public/images"
+    dossier_img_boissons: "%kernel.project_dir%/public/images/boissons"
+    dossier_img_plats: "%kernel.project_dir%/public/images/plats"
+    dossier_img_ingredients: "%kernel.project_dir%/public/images/ingredients"
+    dossier_img_cocktails: "%kernel.project_dir%/public/images/cocktails"
+    dossier_img_chichas: "%kernel.project_dir%/public/images/chichas"
+    dossier_img_desserts: "%kernel.project_dir%/public/images/desserts"
+    dossier_img_entrees: "%kernel.project_dir%/public/images/entrees"
+    dossier_img_logos: "%kernel.project_dir%/public/images/logos"
+    dossier_logo_paie: "%kernel.project_dir%/public/images/logo_paie"
+    dossier_photo_personnel: "%kernel.project_dir%/public/personnel/photo"
+    dossier_identite_personnel: "%kernel.project_dir%/public/personnel/identite"
+    dossier_achat: "%kernel.project_dir%/public/achatFournisseur/facture"
+    dossier_depenses: "%kernel.project_dir%/public/depenses"
+    dossier_decaissement: "%kernel.project_dir%/public/decaissement"
+    dossier_caisse: "%kernel.project_dir%/public/caisse"
+    dossier_client: "%kernel.project_dir%/public/client"
 
 services:
     # default configuration for services in *this* file

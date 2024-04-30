@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New MenuVente{% endblock %}
+
+{% block body %}
+    <h1>Create new MenuVente</h1>
+
+    {{ include('nhema/admin/menu_vente/_form.html.twig') }}
+
+    <a href="{{ path('app_nhema_admin_menu_vente_index') }}">back to list</a>
+{% endblock %}

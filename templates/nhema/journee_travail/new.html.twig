@@ -1,0 +1,33 @@
+{% extends 'base_nhema.html.twig' %}
+{% set queryParams = app.request.query.all %}
+{% set queryString = queryParams|filter((v, k) => k != "page" and k != "ajustement" and k != "id_stock") | url_encode %}
+
+{% block title %}Modification journée{% endblock %}
+{% block bandeau %} {% endblock %}
+ {% block carousel %}
+    <div id="carouselExampleAutoplaying" class="carousel slide py-2" data-bs-ride="carousel">
+    </div>
+ {% endblock %}
+ {% block categories %} {% endblock %}
+ {% block contact %} {% endblock %}
+ {% block collaborateurs %} {% endblock %}
+ {% block scroll %} {% endblock %}
+ {% block footer %} {% endblock %}
+ {% block social %} {% endblock %}
+
+{% block produits %}
+    <div class="row my-2">
+        {# {% include "_common/_nav_client.html.twig" %} #}
+
+        <div class="col-sm-12 col-md-10">
+            {{ include("_common/_messages_flash.html.twig") }}
+            <h3>Demarrer une nouvelle journée de travail</h3>
+
+            {{ include('nhema/journee_travail/_form.html.twig') }}
+
+            <div class="my-4 d-flex justify-content-between">
+                <a class="btn btn-light" href="{{ path('app_nhema_journee_travail_index', { lieu_vente : lieu_vente.id}) }}">Retour</a>
+            </div>
+    </div>
+</div>
+{% endblock %}

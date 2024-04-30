@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Dessert{% endblock %}
+
+{% block body %}
+    <h1>Create new Dessert</h1>
+
+    {{ include('nhema/admin/dessert/_form.html.twig') }}
+
+    <a href="{{ path('app_nhema_admin_dessert_index') }}">back to list</a>
+{% endblock %}

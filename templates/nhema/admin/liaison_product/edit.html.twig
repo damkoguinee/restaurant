@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit LiaisonProduct{% endblock %}
+
+{% block body %}
+    <h1>Edit LiaisonProduct</h1>
+
+    {{ include('nhema/admin/liaison_product/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_nhema_admin_liaison_product_index') }}">back to list</a>
+
+    {{ include('nhema/admin/liaison_product/_delete_form.html.twig') }}
+{% endblock %}

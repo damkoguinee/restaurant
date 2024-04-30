@@ -1,5 +1,23 @@
 twig:
     file_name_pattern: '*.twig'
+    default_path: '%kernel.project_dir%/templates'
+    form_themes: ["bootstrap_5_layout.html.twig"]
+    date:
+        format: d/m/Y
+    globals:
+        chemin_images_boissons: "images/boissons/"
+        chemin_images_plats: "images/plats/"
+        chemin_images_ingredients: "images/ingredients/"
+        chemin_images_cocktails: "images/cocktails/"
+        chemin_images_chichas: "images/chichas/"
+        chemin_images_desserts: "images/desserts/"
+        chemin_images_entrees: "images/entrees/"
+        chemin_images_bannieres: "images/bannieres/"
+        chemin_images_categories: "images/categories/"
+        chemin_images_logos: "images/logos/"
+        chemin_img_paie: "images/logo-paie/"
+        chemin_photo_personnel: "personnel/photo/"
+        chemin_identite_personnel: "personnel/identite/"
 
 when@test:
     twig:

@@ -1,0 +1,17 @@
+{{ form_errors(form) }}
+{{ form_start(form) }}
+    {% if referer is defined %}
+        <input type="hidden" name="retour" value="{{referer}}">
+    {% endif %}
+    <div class="row mb-1">
+         
+        <div class="col-sm-12 col-md-3">
+            {{ form_row(form.jourDeTravail) }}
+        </div>
+        <div class="col-sm-12 col-md-3">
+            {{ form_row(form.statut) }}
+        </div> 
+    </div>
+
+    <button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
+{{ form_end(form) }}

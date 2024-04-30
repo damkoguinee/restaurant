@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}connexion{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row align-items-center py-1" style="margin: auto; margin-top: 1rem; width:80%; background-image: url('images/config/fond.jpg');">
+        <div class="row my-1">		          
+            <div class="card m-auto" style="width: 8rem;">
+                <img src="images/config/damko.jpg" class="card-img-top m-auto" alt="..." style="width: 8rem; height: 8rem">
+            </div>
+        </div>
+
+        <div  style="background-color:#152736; color: white; display:flex; justify-content:space-around;align-items: center; ">
+					
+			<div class="row m-auto my-2">
+                <img src="images/config/client.jpg" class="card-img-top m-auto" alt="..." style="width: 10rem; border-radius:10px;">
+            </div>			
+
+			<div class="col-10 m-auto p-3 " style="background-color:#152736; color: white">
+				{# <div class="text-center"><img width="100%" height="40" src="images/config/drapeau.png"></div> #}
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                        </div>
+                    {% endif %}
+
+                    <h1 class="h5 my-3 font-weight-normal">Acceder à votre compte</h1>
+                    <label for="inputUsername">Votre identifiant</label>
+                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+                    <label for="inputPassword">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                    <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <button class="btn btn-lg btn-primary my-2" type="submit">
+                        Connexion
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col p-3 mt-5 bg-opacity-5 border border-danger border-3 rounded" style="box-shadow: 2px 1px 10px;">
+
+        <legend class="text-center" style="background-color:#152736; color: white; font-size: 18px;">À Propos de la licence et du logiciel Nehma Restauration</legend>
+            <div class="col">Développé par la société DAMKO</div>
+            <div class="col">Siège Social: Labé République de Guinée</div>
+            <div class="col">Matricule N°: 11978 </div>
+            <div class="col">NIF: 482907474</div>		            
+            <div class="col">Tel:(00224) 628 19 66 28</div>
+            <div class="col">Email:gestcomdev@gmail.com</div>
+            <div class="col">Numéro licence: <?= $product->num_licence; ?> </div>
+            <div class="col">Date de souscription:  </div>
+            <div class="col" style="color: red;">Valable jusqu'au</div>
+            <div class="copyright"><img src="images/config/copyright.jpg" height="40"> </div>	
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Dessert{% endblock %}
+
+{% block body %}
+    <h1>Edit Dessert</h1>
+
+    {{ include('nhema/admin/dessert/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_nhema_admin_dessert_index') }}">back to list</a>
+
+    {{ include('nhema/admin/dessert/_delete_form.html.twig') }}
+{% endblock %}

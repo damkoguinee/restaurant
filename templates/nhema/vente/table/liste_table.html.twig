@@ -1,0 +1,65 @@
+{% extends 'base_nhema.html.twig' %}
+{% set queryParams = app.request.query.all %}
+{% set queryString = queryParams|filter((v, k) => k != "page" and k != "ajustement" and k != "id_stock") | url_encode %}
+
+{% block title %}liste des tables{% endblock %}
+{% block bandeau %} {% endblock %}
+ {% block carousel %}
+    <div id="carouselExampleAutoplaying" class="carousel slide py-2" data-bs-ride="carousel">
+    </div>
+ {% endblock %}
+ {% block categories %} {% endblock %}
+ {% block contact %} {% endblock %}
+ {% block collaborateurs %} {% endblock %}
+ {% block scroll %} {% endblock %}
+ {% block footer %} {% endblock %}
+ {% block social %} {% endblock %}
+
+{% block produits %}
+
+    <div class="row my-2">
+        {% include "_common/_nav_table.html.twig" %}
+
+        <div class="col-sm-12 col-md-10">
+            {{ include("_common/_messages_flash.html.twig") }}
+            <table class="table table-bordered table-striped table-hover align-middle">
+                <thead class="sticky-top bg-light text-center">
+                    <tr>
+                        <th colspan="8">
+                            Liste des tables
+                            <a class="btn btn-warning" href="{{ path('app_nhema_vente_table_new', {lieu_vente : lieu_vente.id}) }}">Ajouter une table</a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="bg-info text-white">N°</th>
+                        <th class="bg-info text-white">Désignation</th>
+                        <th class="bg-info text-white">Capacité</th>
+                        <th class="bg-info text-white">Emplacement</th>
+                        <th class="bg-info text-white">actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, table in tables %}
+                        <tr>
+                            <td class="text-center">{{ key + 1 }}</td>
+                            <td>{{ table.nom|ucfirst  }}</td>
+                            <td class="text-center">{{ table.capacite  }}</td>
+                            <td class="text-center">{{ table.salle.nom|ucfirst  }}</td>
+                            
+                            <td class="text-center">
+                                <form method="post" action="{{ path('app_nhema_vente_table_delete', {'id': table.id, 'lieu_vente' : lieu_vente.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ table.id) }}">
+                                    <button class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

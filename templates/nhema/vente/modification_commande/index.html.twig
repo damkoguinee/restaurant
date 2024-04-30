@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ModificationCommande index{% endblock %}
+
+{% block body %}
+    <h1>ModificationCommande index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantite</th>
+                <th>PrixVente</th>
+                <th>DateCommande</th>
+                <th>DateSaisie</th>
+                <th>TypeVente</th>
+                <th>Commentaire</th>
+                <th>Statut</th>
+                <th>TypeProduct</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for modification_commande in modification_commandes %}
+            <tr>
+                <td>{{ modification_commande.id }}</td>
+                <td>{{ modification_commande.quantite }}</td>
+                <td>{{ modification_commande.prixVente }}</td>
+                <td>{{ modification_commande.dateCommande ? modification_commande.dateCommande|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ modification_commande.dateSaisie ? modification_commande.dateSaisie|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ modification_commande.typeVente }}</td>
+                <td>{{ modification_commande.commentaire }}</td>
+                <td>{{ modification_commande.statut }}</td>
+                <td>{{ modification_commande.typeProduct }}</td>
+                <td>
+                    <a href="{{ path('app_nhema_vente_modification_commande_show', {'id': modification_commande.id}) }}">show</a>
+                    <a href="{{ path('app_nhema_vente_modification_commande_edit', {'id': modification_commande.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nhema_vente_modification_commande_new') }}">Create new</a>
+{% endblock %}

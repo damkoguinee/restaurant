@@ -1,0 +1,7 @@
+<div class="col-sm-12 col-md-2 pb-3" style="background-color:#152736;">
+    <a style="width: 100%; " class="btn btn-light text-center fw-bold m-auto my-2" href="{{path("app_nhema_home_type_vente", {lieu_vente : lieu_vente.id})}}">Accueil</a>
+
+    {% for service in services %}
+        <a style="width: 100%; " class="btn btn-light text-center fw-bold m-auto my-2" href="{{path("app_nhema_vente_table_commande_preparation", {service : service.id, lieu_vente : lieu_vente.id})}}">{{service.nom|ucwords}}</a>        
+    {% endfor %}     
+</div>

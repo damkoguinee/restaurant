@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CocktailRecette{% endblock %}
+
+{% block body %}
+    <h1>Edit CocktailRecette</h1>
+
+    {{ include('nhema/admin/cocktail_recette/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_nhema_admin_cocktail_recette_index') }}">back to list</a>
+
+    {{ include('nhema/admin/cocktail_recette/_delete_form.html.twig') }}
+{% endblock %}

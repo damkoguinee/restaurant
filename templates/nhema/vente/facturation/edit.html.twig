@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Facturation{% endblock %}
+
+{% block body %}
+    <h1>Edit Facturation</h1>
+
+    {{ include('nhema/vente/facturation/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_nhema_vente_facturation_index') }}">back to list</a>
+
+    {{ include('nhema/vente/facturation/_delete_form.html.twig') }}
+{% endblock %}

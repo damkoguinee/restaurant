@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TableCommande{% endblock %}
+
+{% block body %}
+    <h1>Edit TableCommande</h1>
+
+    {{ include('nhema/vente/table_commande/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_nhema_vente_table_commande_index') }}">back to list</a>
+
+    {{ include('nhema/vente/table_commande/_delete_form.html.twig') }}
+{% endblock %}
